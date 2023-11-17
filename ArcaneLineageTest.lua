@@ -100,7 +100,7 @@ wait()
 --Combat
     local Combat = Window:MakeTab({
         Name = "Combat",
-        Icon = "rbxassetid://15365907739",
+        Icon = "rbxassetid://10734975692",
         PremiumOnly = false
     })
 
@@ -179,7 +179,7 @@ wait()
 --Automation
     local Automation = Window:MakeTab({
         Name = "Automation",
-        Icon = "rbxassetid://15365908471",
+        Icon = "rbxassetid://10709782230",
         PremiumOnly = false
     })
 
@@ -366,7 +366,7 @@ wait()
 --Merchant
     local Merchant = Window:MakeTab({
         Name = "Merchant",
-        Icon = "rbxassetid://15365909345",
+        Icon = "rbxassetid://10734952479",
         PremiumOnly = false
     })
 
@@ -414,7 +414,7 @@ wait()
 --Teleports
     local Teleports = Window:MakeTab({
         Name = "Teleports",
-        Icon = "rbxassetid://15365909874",
+        Icon = "rbxassetid://10734886004",
         PremiumOnly = false
     })
 
@@ -498,7 +498,7 @@ wait()
 --Misc
     local Misc = Window:MakeTab({
         Name = "Misc",
-        Icon = "rbxassetid://15365911123",
+        Icon = "rbxassetid://10734950309",
         PremiumOnly = false
     })
 
