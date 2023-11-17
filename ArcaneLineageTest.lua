@@ -347,7 +347,7 @@ wait()
                     OrionLib:MakeNotification({
                         Name = "Missing Required Ingredient For:",
                         Content = tostring(Potion),
-                        Image = "rbxassetid://12614663538",
+                        Image = "rbxassetid://10747382750",
                         Time = 5
                     })
                 end
@@ -384,7 +384,7 @@ wait()
                     OrionLib:MakeNotification({
                         Name = "Merchant Detected!",
                         Content = "The Mysterious Merchant Is Spawned!",
-                        Image = "rbxassetid://12614663538",
+                        Image = "rbxassetid://10747382750",
                         Time = 5
                     })
                     task.wait(5)
@@ -403,7 +403,7 @@ wait()
                 OrionLib:MakeNotification({
                     Name = "No Merchant Detected!",
                     Content = "Cannot Teleport To Merchant, Not Spawned!",
-                    Image = "rbxassetid://12614663538",
+                    Image = "rbxassetid://10747382750",
                     Time = 5
                 })
             end
