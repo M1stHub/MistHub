@@ -366,7 +366,7 @@ wait()
 --Merchant
     local Merchant = Window:MakeTab({
         Name = "Merchant",
-        Icon = "rbxassetid://12614663538",
+        Icon = "rbxassetid://15365909345",
         PremiumOnly = false
     })
 
