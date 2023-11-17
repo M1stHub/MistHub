@@ -558,6 +558,18 @@ wait()
         end
     })
 
+    Rollback:AddButton({
+        Name = "Server Hop",
+        Callback = function()
+            local Servers = game.HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+            for i,v in pairs(Servers.data) do
+                if v.playing ~= v.maxPlayers then
+                    game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, v.id)
+                end
+            end
+        end
+    })
+
     local AntiAFK = Misc:AddSection({
         Name = "Anti-AFK Built In"
     })
