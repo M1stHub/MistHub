@@ -379,7 +379,6 @@ PlayerSec:AddSlider({
 })
 
 -- Combat
-
 local Combat = Window:MakeTab({
     Name = "Combat",
     Icon = "rbxassetid://5009915795",
@@ -540,20 +539,6 @@ Combat:AddToggle({
                 end
             end
 
-            -- Coroutine to periodically enable Auto-Attack
-            spawn(function()
-                while true do
-                    if getgenv().AutoAttack then
-                        getgenv().AutoAttackEnabled = true
-                        print("Auto-Attack Enabled")
-                        task.wait(30)
-                        getgenv().AutoAttackEnabled = false
-                        print("Auto-Attack Disabled")
-                        task.wait(0.1) -- Small delay before re-enabling
-                    end
-                end
-            end)
-
             if AutoAttack then
                 OrionLib:MakeNotification({
                     Name = "Warning:",
@@ -562,6 +547,18 @@ Combat:AddToggle({
                     Image = "rbxassetid://12614663538",
                     Time = 10
                 })
+                -- Coroutine to periodically enable Auto-Attack
+                spawn(function()
+                    while AutoAttack do
+                        getgenv().AutoAttackEnabled = true
+                        print("Auto-Attack Enabled")
+                        task.wait(30)
+                        getgenv().AutoAttackEnabled = false
+                        print("Auto-Attack Disabled")
+                        task.wait(0.1) -- Small delay before re-enabling
+                    end
+                end)
+
                 while AutoAttack do
                     task.wait()
                     checkforfight()
