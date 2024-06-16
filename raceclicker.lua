@@ -394,6 +394,7 @@ Combat:AddToggle({
     Callback = function(Value)
         if not AutoBlock then
             getgenv().AutoDodge = (Value)
+            print("Auto-Dodge set to:", Value)
 
             while AutoDodge and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
                 task.wait()
@@ -425,6 +426,7 @@ Combat:AddToggle({
     Callback = function(Value)
         if not AutoDodge then
             getgenv().AutoBlock = (Value)
+            print("Auto-Block set to:", Value)
 
             while AutoBlock and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
                 task.wait()
@@ -455,38 +457,36 @@ Combat:AddToggle({
     Flag = "AutoQTE",
     Callback = function(Value)
         getgenv().AutoQTE = (Value)
+        print("Auto-QTE set to:", Value)
         local BaseClass = lp.PlayerGui.StatMenu.Holder.ContentFrame.Stats.Body.RightColumn.Content.BaseClass.Type.Text
 
         while AutoQTE and game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress") do
             task.wait()
 
-            -- Wizard
             if BaseClass == "Wizard" then
                 local ohBoolean1 = true
                 local ohString2 = "MagicQTE"
                 game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
                 lp.PlayerGui.Combat.MagicQTE.Visible = false
 
-                -- Thief
             elseif BaseClass == "Thief" then
                 local ohBoolean1 = true
                 local ohString2 = "DaggerQTE"
                 game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
                 lp.PlayerGui.Combat.DaggerQTE.Visible = false
 
-                -- Slayer
             elseif BaseClass == "Slayer" then
                 local ohBoolean1 = true
                 local ohString2 = "SpearQTE"
                 game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
                 lp.PlayerGui.Combat.SpearQTE.Visible = false
-                -- Fist
+
             elseif BaseClass == "Martial Artist" then
                 local ohBoolean1 = true
                 local ohString2 = "FistQTE"
                 game:GetService("ReplicatedStorage").Remotes.Information.RemoteFunction:FireServer(ohBoolean1, ohString2)
                 lp.PlayerGui.Combat.FistQTE.Visible = false
-                -- Sword
+
             elseif BaseClass == "Warrior" then
                 local ohBoolean1 = true
                 local ohString2 = "SwordQTE"
@@ -503,6 +503,7 @@ Combat:AddToggle({
     Default = false,
     Callback = function(Value)
         getgenv().AutoAttack = (Value)
+        print("Auto-Attack set to:", Value)
 
         pcall(function()
             local function performAttack(target)
@@ -542,10 +543,14 @@ Combat:AddToggle({
             -- Coroutine to periodically enable Auto-Attack
             spawn(function()
                 while true do
-                    getgenv().AutoAttackEnabled = true
-                    task.wait(30)
-                    getgenv().AutoAttackEnabled = false
-                    task.wait(0.1) -- Small delay before re-enabling
+                    if getgenv().AutoAttack then
+                        getgenv().AutoAttackEnabled = true
+                        print("Auto-Attack Enabled")
+                        task.wait(30)
+                        getgenv().AutoAttackEnabled = false
+                        print("Auto-Attack Disabled")
+                        task.wait(0.1) -- Small delay before re-enabling
+                    end
                 end
             end)
 
@@ -589,6 +594,7 @@ Combat:AddDropdown({
     Options = Moves,
     Callback = function(Value)
         MoveToUse = Value
+        print("MoveToUse set to:", Value)
     end
 })
 
@@ -596,8 +602,10 @@ Combat:AddDropdown({
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
         Boolerean = true
+        print("Fight in progress")
     else
         Boolerean = false
+        print("No fight in progress")
     end
 end
 
