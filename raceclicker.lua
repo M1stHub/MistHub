@@ -552,7 +552,7 @@ Combat:AddToggle({
                     while AutoAttack do
                         getgenv().AutoAttackEnabled = true
                         print("Auto-Attack Enabled")
-                        task.wait(30)
+                        task.wait(60)
                         getgenv().AutoAttackEnabled = false
                         print("Auto-Attack Disabled")
                         task.wait(0.1) -- Small delay before re-enabling
