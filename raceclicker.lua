@@ -539,49 +539,49 @@ Combat:AddToggle({
                 end
             end
 
-            if AutoAttack then
-                OrionLib:MakeNotification({
-                    Name = "Warning:",
-                    Content =
-                    "If the auto attack doesn't work in the first fight after you enable it simply re-enable it and it should work from then on!",
-                    Image = "rbxassetid://12614663538",
-                    Time = 10
-                })
-                -- Coroutine to periodically enable Auto-Attack
-                spawn(function()
-                    while AutoAttack do
-                        getgenv().AutoAttackEnabled = true
-                        print("Auto-Attack Enabled")
-                        task.wait(60)
-                        getgenv().AutoAttackEnabled = false
-                        print("Auto-Attack Disabled")
-                        task.wait(0.1) -- Small delay before re-enabling
-                    end
-                end)
+if Value then
+            OrionLib:MakeNotification({
+                Name = "Warning:",
+                Content = "If the auto attack doesn't work in the first fight after you enable it simply re-enable it and it should work from then on!",
+                Image = "rbxassetid://12614663538",
+                Time = 10
+            })
 
+            -- Coroutine to periodically enable Auto-Attack
+            spawn(function()
                 while AutoAttack do
-                    task.wait()
-                    checkforfight()
-                    task.wait(1.1)
-                    if Boolerean == true and getgenv().AutoAttackEnabled then
-                        local enemiesToAttack = {}
-                        for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
-                            if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value and Enemies.Parent.Name ~= lp.Name then
-                                table.insert(enemiesToAttack, Enemies.Parent.Name)
+                    getgenv().AutoAttackEnabled = true
+                    print("Auto-Attack Enabled")
+                    task.wait(30)  -- Adjust the interval as needed (30 seconds)
+                    getgenv().AutoAttackEnabled = false
+                    print("Auto-Attack Disabled")
+                    task.wait(0.1)  -- Small delay before re-enabling
+                end
+            end)
 
-                                for _, enemyName in ipairs(enemiesToAttack) do
-                                    local enemy = game:GetService("Workspace").Living[enemyName]
-                                    if enemy then
-                                        performAttack(enemy)
-                                    end
-                                    task.wait()
-                                end
-                            end
+            -- Loop to attack enemies when Auto-Attack is enabled
+            while AutoAttack do
+                task.wait()
+                checkforfight()
+
+                if Boolerean and getgenv().AutoAttackEnabled then
+                    local enemiesToAttack = {}
+                    for _, Enemies in pairs(game:GetService("Workspace").Living:GetChildren()) do
+                        if Enemies:FindFirstChild("FightInProgress") and Enemies.Name ~= lp.Name then
+                            table.insert(enemiesToAttack, Enemies.Name)
                         end
+                    end
+
+                    for _, enemyName in ipairs(enemiesToAttack) do
+                        local enemy = game:GetService("Workspace").Living[enemyName]
+                        if enemy then
+                            performAttack(enemy)
+                        end
+                        task.wait()
                     end
                 end
             end
-        end)
+        end
     end
 })
 
