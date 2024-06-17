@@ -132,7 +132,6 @@ local CurrentJumpPower = 50
 local runbuff = workspace.Living[lp.Name].Effects.RunBuff.Value
 local maxTime = 1.5
 local debounce = 0.2
-getgenv().AutoAttackEnabled = true
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
@@ -539,6 +538,17 @@ Combat:AddToggle({
                     task.wait()
                 end
             end
+
+                    spawn(function()
+    while true do
+        AutoAttackEnabled = true
+        print("Auto-Attack Enabled")
+        task.wait(15)
+        AutoAttackEnabled = false
+        print("Auto-Attack Disabled")
+        task.wait(0.1)  -- Small delay before re-enabling
+    end
+end)
 
             if AutoAttack then
                 OrionLib:MakeNotification({
