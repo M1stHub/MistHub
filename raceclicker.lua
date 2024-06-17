@@ -133,12 +133,11 @@ local runbuff = workspace.Living[lp.Name].Effects.RunBuff.Value
 local maxTime = 1.5
 local debounce = 0.2
 
-local function checkForFight()
-    local player = game:GetService("Workspace").Living[lp.Name]
-    if player and player:FindFirstChild("FightInProgress") then
-        return true
+function checkforfight()
+    if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
+        Boolerean = true
     else
-        return false
+        Boolerean = false
     end
 end
 
@@ -498,17 +497,6 @@ Combat:AddToggle({
     end
 })
 
-spawn(function()
-    while AutoAttack do
-        getgenv().AutoAttackEnabled = true
-        print("Auto-Attack Enabled")
-        task.wait(30)
-        getgenv().AutoAttackEnabled = false
-        print("Auto-Attack Disabled")
-        task.wait(0.1) -- Small delay before re-enabling
-    end
-end)
-
 Combat:AddToggle({
     Name = "Auto-Attack",
     Default = false,
@@ -559,26 +547,31 @@ Combat:AddToggle({
                     Image = "rbxassetid://12614663538",
                     Time = 10
                 })
+                -- Coroutine to periodically enable Auto-Attack
 
                 while AutoAttack do
-                    task.wait()  -- Yield briefly to avoid hogging the CPU
-                    if checkForFight() and AutoAttackEnabled then
+                    task.wait()
+                    checkforfight()
+                    task.wait(1.1)
+                    if Boolerean == true and getgenv().AutoAttackEnabled then
+                        while AutoAttack do
+                            getgenv().AutoAttackEnabled = false
+                            task.wait(0.1) -- Small delay before re-enabling
+                            getgenv().AutoAttackEnabled = true
+                        end
                         local enemiesToAttack = {}
-                
-                        -- Find enemies to attack
-                        for _, enemy in pairs(game:GetService("Workspace").Living:GetChildren()) do
-                            if enemy:IsA("Model") and enemy.Name ~= lp.Name then
-                                local fightInProgress = enemy:FindFirstChild("FightInProgress")
-                                if fightInProgress and fightInProgress.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value then
-                                    table.insert(enemiesToAttack, enemy)
+                        for _, Enemies in next, game:GetService("Workspace").Living:GetDescendants() do
+                            if Enemies:IsA("IntValue") and Enemies.Value == game:GetService("Workspace").Living[lp.Name]:WaitForChild("FightInProgress").Value and Enemies.Parent.Name ~= lp.Name then
+                                table.insert(enemiesToAttack, Enemies.Parent.Name)
+
+                                for _, enemyName in ipairs(enemiesToAttack) do
+                                    local enemy = game:GetService("Workspace").Living[enemyName]
+                                    if enemy then
+                                        performAttack(enemy)
+                                    end
+                                    task.wait()
                                 end
                             end
-                        end
-                
-                        -- Perform attacks on found enemies
-                        for _, enemy in ipairs(enemiesToAttack) do
-                            performAttack(enemy)
-                            task.wait()  -- Yield to avoid spamming attacks
                         end
                     end
                 end
