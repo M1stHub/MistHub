@@ -132,6 +132,7 @@ local CurrentJumpPower = 50
 local runbuff = workspace.Living[lp.Name].Effects.RunBuff.Value
 local maxTime = 1.5
 local debounce = 0.2
+getgenv().AutoAttackEnabled = true
 
 function checkforfight()
     if game:GetService("Workspace").Living[lp.Name]:FindFirstChild("FightInProgress") then
