@@ -96,6 +96,14 @@ function checkforfight()
     end
 end
 
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/OneFool/intro/main/custom%20intro%20orion')))()
+local Window = OrionLib:MakeWindow({
+    Name = "Fool Hub | Arcane Lineage",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "FoolArcLin"
+})
+
 local Combat = Window:MakeTab({
     Name = "Combat",
     Icon = "rbxassetid://5009915795",
