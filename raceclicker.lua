@@ -1043,7 +1043,7 @@ Teleports:AddDropdown({
                 TweenInfo.new(Time), { CFrame = CFrameEnd })
             tween:Play()
         elseif Value == "Thanasius" then
-            local CFrameEnd = CFrame.new(1675.40479, 5.31999874, -1663.76953, -0.404080033, 1.18365541e-07, 0.914723635,
+            local CFrameEnd = CFrame.new(1675.40479, 5.31999874, -1663.76953, -0.404080033, 1.183655XS41e-07, 0.914723635,
                 3.73702065e-08, 1, -1.1289201e-07, -0.914723635, -1.1433996e-08, -0.404080033)
             local Time = 0
             local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
@@ -1072,6 +1072,12 @@ Teleports:AddButton({
         lp.Character.HumanoidRootPart.CFrame = workspace.Mats.MeditationMat:WaitForChild("Root").CFrame
         task.wait(1)
         workspace.Living[lp.Name].MeditateHandler.Meditate:FireServer()
+        task.wait(10)
+        local CFrameEnd = CFrame.new(791, 235, 2119)
+        local Time = 0
+        local tween = game:GetService("TweenService"):Create(lp.Character.HumanoidRootPart,
+            TweenInfo.new(Time), { CFrame = CFrameEnd })
+    tween:Play()
     end
 })
 
