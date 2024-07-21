@@ -35,7 +35,7 @@ local function sendDiscordWebhook()
 end
 
 local function BuyTicket()
-    if getgenv().Reset then
+    if getgenv().buyBossTicket then
         spawn(function()
             while true do
                 local args = {
