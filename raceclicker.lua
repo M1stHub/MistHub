@@ -36,13 +36,14 @@ end
 
 local function BuyTicket()
     if getgenv().Reset then
-        while wait() do
+        while true do
             local args = {
                 [1] = "BuyBossRushShopItem",
                 [2] = "Boss Rush Ticket (Gem)"
             }
             
             game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+            wait()
         end
     end 
 end
