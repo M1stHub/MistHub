@@ -34,8 +34,21 @@ local function sendDiscordWebhook()
     }
 end
 
+local function BuyTicket()
+    if getgenv().Reset then
+        local args = {
+            [1] = "BuyBossRushShopItem",
+            [2] = "Boss Rush Ticket (Gem)"
+        }
+        
+        game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+        wait()
+    end 
+end
+
 if game.PlaceId == 6938803436 or game.PlaceId == 7274690025 then
     sendDiscordWebhook()
+    BuyTicket()
 elseif getgenv().Reset and game.PlaceId == 6990129309 then
     Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
 end
