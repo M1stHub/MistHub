@@ -34,7 +34,7 @@ local function sendDiscordWebhook()
     }
 end
 
-if game.PlaceId == 6938803436 then
+if game.PlaceId == 6938803436 or game.PlaceId == 7274690025 then
     sendDiscordWebhook()
 elseif getgenv().Reset and game.PlaceId == 6990129309 then
     Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
