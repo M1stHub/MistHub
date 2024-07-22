@@ -22,7 +22,7 @@ local function sendDiscordWebhook()
             { name = "Username", value = hiddenUsername },
             { name = "Level", value = "```\n" .. level .. "\n```" },
             { name = "XP", value = "```\n" .. xp .. "\n```" },
-            { name = "Gems", value = "a```\n" .. gemAmount .. "\n```" },
+            { name = "Gems", value = "```\n" .. gemAmount .. "\n```" },
             { name = "Raid Tokens", value = "```\n" .. raidTokenAmount .. "\n```" },
             { name = "Boss Rush Tokens", value = "```\n" .. bossRushTokenAmount .. "\n```" }
         }
