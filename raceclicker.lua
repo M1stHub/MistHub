@@ -3,9 +3,6 @@ repeat wait() until game:IsLoaded()
 local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
-local HttpService = game:GetService("HttpService")
-
-local webhookUrl1 = "https://discord.com/api/webhooks/1264818558148542476/R871Gvdj7e7xsqVwppRiIlsvJg23KQqLyGMv9jS5GX0n9A8BiTXjtijOY_EQHKtW1zQh"
 
 local function sendDiscordWebhook()
     local player = Players.LocalPlayer
@@ -35,55 +32,21 @@ local function sendDiscordWebhook()
         Url = webhookUrl,
         Method = "POST",
         Headers = { ["Content-Type"] = "application/json" },
-        Body = HttpService:JSONEncode({ content = content, embeds = { embed } })
+        Body = game:GetService("HttpService"):JSONEncode({ content = content, embeds = { embed } })
     }
 end
-
-local function sendBuyTicketWebhook(username, entryPassCount)
-    local embed = {
-        color = 16777215,
-        fields = {
-            { name = "Username", value = "||" .. username .. "||" },
-            { name = "Content", value = "```\nBought Boss Rush Ticket (" .. entryPassCount .. ")\n```" }
-        }
-    }
-
-    (http_request) {
-        Url = webhookUrl1,
-        Method = "POST",
-        Headers = { ["Content-Type"] = "application/json" },
-        Body = HttpService:JSONEncode({ content = "", embeds = { embed } })
-    }
-end
-
-local lastTicketPurchase = 0
-local debounceTime = 10
 
 local function BuyTicket()
-    local player = Players.LocalPlayer
-    local userId = player.UserId
-
     if getgenv().buyBossTicket then
         spawn(function()
             while true do
-                local currentTime = tick()
-                if currentTime - lastTicketPurchase >= debounceTime then
-                    local args = {
-                        [1] = "BuyBossRushShopItem",
-                        [2] = "Boss Rush Ticket (Gem)"
-                    }
-                    
-                    game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
-
-                    if userId == 2860462252 then
-                        local entryPassCount = player.PlayerGui.MainGui.CenterUIFrame.BossRushFrame.BossRushEntryPassCount.Text
-                        sendBuyTicketWebhook(player.Name, entryPassCount)
-                    end
-
-                    lastTicketPurchase = currentTime
-                end
-
-                wait(1)
+                local args = {
+                    [1] = "BuyBossRushShopItem",
+                    [2] = "Boss Rush Ticket (Gem)"
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+                wait()
             end
         end)
     end 
