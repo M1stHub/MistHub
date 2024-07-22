@@ -5,7 +5,7 @@ local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local HttpService = game:GetService("HttpService")
 
-local webhookUrl = "https://discord.com/api/webhooks/1264818558148542476/R871Gvdj7e7xsqVwppRiIlsvJg23KQqLyGMv9jS5GX0n9A8BiTXjtijOY_EQHKtW1zQh"
+local webhookUrl1 = "https://discord.com/api/webhooks/1264818558148542476/R871Gvdj7e7xsqVwppRiIlsvJg23KQqLyGMv9jS5GX0n9A8BiTXjtijOY_EQHKtW1zQh"
 
 local function sendDiscordWebhook()
     local player = Players.LocalPlayer
@@ -49,7 +49,7 @@ local function sendBuyTicketWebhook(username)
     }
 
     (http_request) {
-        Url = webhookUrl,
+        Url = webhookUrl1,
         Method = "POST",
         Headers = { ["Content-Type"] = "application/json" },
         Body = HttpService:JSONEncode({ content = "", embeds = { embed } })
