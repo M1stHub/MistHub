@@ -39,12 +39,12 @@ local function sendDiscordWebhook()
     }
 end
 
-local function sendBuyTicketWebhook(username)
+local function sendBuyTicketWebhook(username, entryPassCount)
     local embed = {
         color = 16777215,
         fields = {
             { name = "Username", value = "||" .. username .. "||" },
-            { name = "Content", value = "```\nBought Boss Rush Ticket\n```" }
+            { name = "Content", value = "```\nBought Boss Rush Ticket (" .. entryPassCount .. ")\n```" }
         }
     }
 
@@ -57,7 +57,7 @@ local function sendBuyTicketWebhook(username)
 end
 
 local lastTicketPurchase = 0
-local debounceTime = 7
+local debounceTime = 10
 
 local function BuyTicket()
     local player = Players.LocalPlayer
@@ -76,7 +76,8 @@ local function BuyTicket()
                     game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
 
                     if userId == 2860462252 then
-                        sendBuyTicketWebhook(player.Name)
+                        local entryPassCount = player.PlayerGui.MainGui.CenterUIFrame.BossRushFrame.BossRushEntryPassCount.Text
+                        sendBuyTicketWebhook(player.Name, entryPassCount)
                     end
 
                     lastTicketPurchase = currentTime
