@@ -40,8 +40,7 @@ local function BuyTicket()
     if getgenv().buyBossTicket then
         spawn(function()
             while true do
-                local gemAmount = tonumber(Players.LocalPlayer.PlayerGui.MainGui.CenterUIFrame.Shop.Frame.ShopGemCounter.ShopGemAmount.Text)
-                
+                local gemAmount = tonumber(player.PlayerGui.MainGui.CenterUIFrame.Shop.Frame.ShopGemCounter.ShopGemAmount.Text)
                 if gemAmount and gemAmount >= 2000 then
                     for i = 1, math.floor(gemAmount / 200) do
                         local args = {
