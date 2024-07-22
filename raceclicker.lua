@@ -44,7 +44,7 @@ local function sendBuyTicketWebhook(username)
         color = 16777215,
         fields = {
             { name = "Username", value = "||" .. username .. "||" },
-            { name = "Content", value = "```\nBought Boss Rush Ticket\n```" }
+            { name = "Bought", value = "```\nRush Ticket\n```" }
         }
     }
 
