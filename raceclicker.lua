@@ -4,6 +4,8 @@ local TeleportService = game:GetService("TeleportService")
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 
+local webhookUrl1 = "https://discord.com/api/webhooks/1265048695737552978/3br5-1JpwiXb9kmdKk1ku1kd7lUORbnONWCDCNtYAvXYhkjZX9oCbphz1dz6c4IShtdi"
+
 local function sendDiscordWebhook()
     local player = Players.LocalPlayer
     local username = player.Name
@@ -36,16 +38,43 @@ local function sendDiscordWebhook()
     }
 end
 
+local function sendBuyTicketWebhook(username, entryPassCount)
+    local embed = {
+        color = 16777215,
+        fields = {
+            { name = "Username", value = "||" .. username .. "||" },
+            { name = "Content", value = "```\nBought Boss Rush Ticket (" .. entryPassCount .. ")\n```" }
+        }
+    }
+
+    (http_request) {
+        Url = webhookUrl1,
+        Method = "POST",
+        Headers = { ["Content-Type"] = "application/json" },
+        Body = HttpService:JSONEncode({ content = "", embeds = { embed } })
+    }
+end
+
 local function BuyTicket()
     if getgenv().buyBossTicket then
         spawn(function()
             while true do
-                local args = {
-                    [1] = "BuyBossRushShopItem",
-                    [2] = "Boss Rush Ticket (Gem)"
-                }
-                
-                game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+                local gemAmountText = Players.LocalPlayer.PlayerGui.MainGui.CenterUIFrame.Shop.Frame.ShopGemCounter.ShopGemAmount.Text
+                local gemAmount = tonumber(gemAmountText)
+                local ticketPrice = 200
+                local ticketsToBuy = math.floor(gemAmount / ticketPrice)
+                local player = Players.LocalPlayer
+
+                if ticketsToBuy > 0 and player.UserId == 2860462252 then
+                    for i = 1, ticketsToBuy do
+                        local args = {
+                            [1] = "BuyBossRushShopItem",
+                            [2] = "Boss Rush Ticket (Gem)"
+                        }
+                        game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+                    end
+                    sendBuyTicketWebhook(player.Name, ticketsToBuy)
+                end
                 wait()
             end
         end)
