@@ -11,7 +11,6 @@ local function sendDiscordWebhook()
     local raidTokenAmount = player.PlayerGui.MainGui.CenterUIFrame.Shop.Frame.ShopRaidTokenCounter.ShopRaidTokenAmount.Text
     local bossRushTokenAmount = player.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushShopCurrencyCounter.BossRushShopCurrencyAmount.Text
     local level = player.PlayerGui.UniversalGui.LeftUIFrame.OwnHealthBarFrame.CharacterTriIcon.Level.LevelShow.Text
-    local xp = player.PlayerGui.UniversalGui.LeftUIFrame.OwnHealthBarFrame.Exp.Text
 
     local hiddenUsername = "||" .. username .. "||"
     local content = ""
@@ -21,7 +20,6 @@ local function sendDiscordWebhook()
         fields = {
             { name = "Username", value = hiddenUsername },
             { name = "Level", value = "```\n" .. level .. "\n```" },
-            { name = "XP", value = "```\n" .. xp .. "\n```" },
             { name = "Gems", value = "```\n" .. gemAmount .. "\n```" },
             { name = "Raid Tokens", value = "```\n" .. raidTokenAmount .. "\n```" },
             { name = "Boss Rush Tokens", value = "```\n" .. bossRushTokenAmount .. "\n```" }
