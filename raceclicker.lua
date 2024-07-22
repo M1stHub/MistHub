@@ -44,7 +44,7 @@ local function sendBuyTicketWebhook(username)
         color = 16777215,
         fields = {
             { name = "Username", value = "||" .. username .. "||" },
-            { name = "Bought", value = "```\nRush Ticket\n```" }
+            { name = "Content", value = "```\nBought Boss Rush Ticket\n```" }
         }
     }
 
@@ -56,32 +56,33 @@ local function sendBuyTicketWebhook(username)
     }
 end
 
+local lastTicketPurchase = 0
+local debounceTime = 7
+
 local function BuyTicket()
     local player = Players.LocalPlayer
     local userId = player.UserId
-    local ticketBought = false
 
     if getgenv().buyBossTicket then
         spawn(function()
             while true do
-                if not ticketBought then
+                local currentTime = tick()
+                if currentTime - lastTicketPurchase >= debounceTime then
                     local args = {
                         [1] = "BuyBossRushShopItem",
                         [2] = "Boss Rush Ticket (Gem)"
                     }
                     
                     game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
-                    
+
                     if userId == 2860462252 then
                         sendBuyTicketWebhook(player.Name)
                     end
-                    
-                    ticketBought = true
+
+                    lastTicketPurchase = currentTime
                 end
-                
-                wait(5)
-                
-                ticketBought = false
+
+                wait(1)
             end
         end)
     end 
