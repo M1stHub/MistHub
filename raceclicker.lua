@@ -49,11 +49,28 @@ local function BuyTicket()
     end 
 end
 
+local function FastMode()
+    spawn(function()
+        for key, object in pairs(workspace:GetDescendants()) do
+            if object:IsA("Part") or object:IsA("UnionOperation") then
+                 object.Material = Enum.Material.SmoothPlastic
+                elseif object:IsA("MeshPart") then
+                  object.Material = Enum.Material.SmoothPlastic
+                 object.TextureId = nil
+               elseif object:IsA("Texture") then
+                 object:Destroy()
+            end
+       end
+    end)
+end
+
 if game.PlaceId == 6938803436 or game.PlaceId == 7274690025 then
     sendDiscordWebhook()
     BuyTicket()
+    FastMode()
 elseif getgenv().Reset and game.PlaceId == 6990129309 then
     Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Health = 0
+    FastMode()
 end
 
 local function loadExternalScript()
@@ -64,6 +81,8 @@ local function loadExternalScript()
         warn("Failed to load external script: " .. tostring(err))
     end
 end
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/AnimeDimensions/main/TurtleHub/UI_Script_1.lua"))()
 
 spawn(function()
     while wait(3) do
