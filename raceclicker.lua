@@ -39,19 +39,14 @@ end
 local function BuyTicket()
     if getgenv().buyBossTicket then
         spawn(function()
-            while true do
-                local gemAmount = tonumber(player.PlayerGui.MainGui.CenterUIFrame.Shop.Frame.ShopGemCounter.ShopGemAmount.Text)
-                if gemAmount and gemAmount >= 2000 then
-                    for i = 1, math.floor(gemAmount / 200) do
-                        local args = {
-                            [1] = "BuyBossRushShopItem",
-                            [2] = "Boss Rush Ticket (Gem)"
-                        }
+            while getgenv().buyBossTicket do
+                local args = {
+                    [1] = "BuyBossRushShopItem",
+                    [2] = "Boss Rush Ticket (Gem)"
+                }
 
-                        game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
-                    end
-                end
-                wait(60)
+                game:GetService("ReplicatedStorage"):WaitForChild("RemoteFunctions"):WaitForChild("MainRemoteFunction"):InvokeServer(unpack(args))
+                wait(1)
             end
         end)
     end 
