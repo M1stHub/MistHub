@@ -82,8 +82,6 @@ local function loadExternalScript()
     end
 end
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Sidhsksjsjsh/AnimeDimensions/main/TurtleHub/UI_Script_1.lua"))()
-
 spawn(function()
     while wait(3) do
         local hub = CoreGui:FindFirstChild("OMG Hub | Anime Dimension | BETA!")
