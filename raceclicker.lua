@@ -17,6 +17,8 @@ local function sendDiscordWebhook()
     local hiddenUsername = "||" .. username .. "||"
     local content = ""
 
+    local currentTime = os.date("%Y-%m-%d %H:%M:%S")
+
     local embed = {
         color = 16777215,
         fields = {
@@ -25,6 +27,9 @@ local function sendDiscordWebhook()
             { name = "Gems", value = "```\n" .. gemAmount .. "\n```" },
             { name = "Raid Tokens", value = "```\n" .. raidTokenAmount .. "\n```" },
             { name = "Boss Rush Tokens", value = "```\n" .. bossRushTokenAmount .. "\n```" }
+        },
+        footer = {
+            text = currentTime
         }
     }
 
@@ -53,14 +58,14 @@ local function FastMode()
     spawn(function()
         for key, object in pairs(workspace:GetDescendants()) do
             if object:IsA("Part") or object:IsA("UnionOperation") then
-                 object.Material = Enum.Material.SmoothPlastic
-                elseif object:IsA("MeshPart") then
-                  object.Material = Enum.Material.SmoothPlastic
-                 object.TextureId = nil
-               elseif object:IsA("Texture") then
-                 object:Destroy()
+                object.Material = Enum.Material.SmoothPlastic
+            elseif object:IsA("MeshPart") then
+                object.Material = Enum.Material.SmoothPlastic
+                object.TextureId = nil
+            elseif object:IsA("Texture") then
+                object:Destroy()
             end
-       end
+        end
     end)
 end
 
