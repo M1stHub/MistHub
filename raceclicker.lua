@@ -12,7 +12,7 @@ local function sendDiscordWebhook()
     local bossRushTokenAmount = player.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushShopCurrencyCounter.BossRushShopCurrencyAmount.Text
     local level = player.PlayerGui.UniversalGui.LeftUIFrame.OwnHealthBarFrame.CharacterTriIcon.Level.LevelShow.Text
     local xp = player.PlayerGui.UniversalGui.LeftUIFrame.OwnHealthBarFrame.Exp.Text
-    local divine = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.DivineCardUpgradeFrame.Frame.DivineCardUpgradeDivineCore.Text
+    local divine = player.PlayerGui.MainGui.CenterUIFrame.DivineCardUpgradeFrame.Frame.DivineCardUpgradeDivineCore.Text
 
     local levelWithXp = level .. " (" .. xp .. ")"
     local hiddenUsername = "||" .. username .. "||"
