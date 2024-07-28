@@ -16,8 +16,6 @@ local function sendDiscordWebhook()
 
     local levelWithXp = level .. " (" .. xp .. ")"
     local hiddenUsername = "||" .. username .. "||"
-    local content = ""
-
     local currentTime = os.date("%Y-%m-%d %H:%M:%S")
 
     local embed = {
@@ -28,19 +26,17 @@ local function sendDiscordWebhook()
             { name = "Gems", value = "```\n" .. gemAmount .. "\n```" },
             { name = "Raid Tokens", value = "```\n" .. raidTokenAmount .. "\n```" },
             { name = "Boss Rush Tokens", value = "```\n" .. bossRushTokenAmount .. "\n```" },
-            { name = "Divine Core", value = "```\n .. divine .. "\n```" }
+            { name = "Divine Core", value = "```\n" .. divine .. "\n```" }
         },
-        footer = {
-            text = currentTime
-        }
+        footer = { text = currentTime }
     }
 
-    (http_request) {
+    (http_request or request)({
         Url = webhookUrl,
         Method = "POST",
         Headers = { ["Content-Type"] = "application/json" },
-        Body = game:GetService("HttpService"):JSONEncode({ content = content, embeds = { embed } })
-    }
+        Body = game:GetService("HttpService"):JSONEncode({ embeds = { embed } })
+    })
 end
 
 local function BuyTicket()
