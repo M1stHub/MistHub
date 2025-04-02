@@ -49,10 +49,8 @@ wait()
         end
     end
 
-    for _, Movess in next, lp.PlayerGui.StatMenu.SkillMenu.Actives:GetChildren() do
-        if Movess:IsA("TextButton") then
-            table.insert(Moves, Movess.Name)
-        end
+    for _, Movess do
+       print('e')
     end
 
     for _, NPC in next, game:GetService("Workspace").NPCs:GetChildren() do
