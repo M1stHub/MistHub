@@ -6,11 +6,12 @@ local startTime = tick()
 local webhookUrl = getgenv().webhookUrl
 
 local itemTargets = {
-    ["Mythical Scroll"] = "mscroll",
-    ["Leviathan Heart"] = "lheart",
-    ["Leviathan Scale"] = "lscale",
-    ["Terror Eyes"] = "teye",
-    ["Fool's Gold"] = "fgold"
+    ["Mythical Scroll"] = "<:mscroll:1363597509632594061>",
+    ["Leviathan Heart"] = "<:lheart:1363597505820102666>",
+    ["Leviathan Scale"] = "<:lscale:1363597885375250553>",
+    ["Terror Eyes"] = "<:teye:1363597887086399668>",
+    ["Fool's Gold"] = "<:fgold:1363598218331684864>",
+    ["Scrap Metal"] = "test"
 }
 
 local itemCounts = {}
